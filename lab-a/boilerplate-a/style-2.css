@@ -1,13 +1,129 @@
+/* #wygenerowane przez AI - układ strony: siatka z menu po lewej i treścią po prawej */
 body {
-  background-color: #ecfbe6;
+  margin: 0;
+  background-color: #0b0b0b;
+  color: #e8e8e8;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
 }
 
+/* #wygenerowane przez AI - header na całą szerokość: zdjęcie z toru w tle przykryte gradientem czerń -> czerwień */
+header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  min-height: 260px;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 35%, rgba(139, 0, 16, 0.6)), url("assets/tor.jpg") center / cover;
+  border-bottom: 4px solid #d5001c;
+}
+
+.logo {
+  width: 56px;
+}
+
+h1 {
+  margin: 0;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 4rem;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 3px 3px 0 #d5001c;
+}
+
+/* #wygenerowane przez AI - menu jako boczna kolumna, przyklejone przy przewijaniu */
+nav {
+  grid-column: 1;
+  grid-row: 2 / span 5;
+  background: #111111;
+  border-right: 2px solid #d5001c;
+}
+
+nav ul {
+  position: sticky;
+  top: 0;
+  list-style: none;
+  margin: 0;
+  padding: 24px 0;
+}
+
+nav a {
+  display: block;
+  padding: 12px 24px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-left: 4px solid transparent;
+}
+
+nav a:hover {
+  background: #1d1d1d;
+  border-left-color: #d5001c;
+  color: #ff3347;
+}
+
+/* #wygenerowane przez AI - sekcje z treścią w prawej kolumnie */
+body > section {
+  grid-column: 2;
+  padding: 0 40px;
+  max-width: 960px;
+}
+
+/* #wygenerowane przez AI - nagłówki: czerwone, pochyłe, wielkimi literami */
+h2 {
+  margin: 48px 0 16px;
+  padding-bottom: 8px;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 2.2rem;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #d5001c;
+  border-bottom: 2px solid #333333;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* #wygenerowane przez AI - czerwony trójkąt przed H3 rysowany samymi ramkami (technika .triangle-right) */
+h3::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid #d5001c;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+p {
+  line-height: 1.7;
+  color: #cfcfcf;
+}
+
+/* #wygenerowane przez AI - karty: ciemne, ostre, czerwony pasek z lewej i ścięty prawy górny róg */
 .card {
-  background: #111;
-  color: #fff;
-  border-left: 4px solid #d5001c;   /* czerwony pasek zamiast cienia */
-  padding: 16px;
-  margin-bottom: 16px;
+  display: flow-root;
+  background: #151515;
+  color: #ffffff;
+  border: 1px solid #2a2a2a;
+  border-left: 4px solid #d5001c;
+  padding: 20px;
+  margin-bottom: 24px;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
 }
 
 img {
@@ -16,3 +132,122 @@ img {
   display: block;
 }
 
+/* #wygenerowane przez AI - zdjęcia jako szerokie, kinowe kadry z czerwoną przerywaną linią pod spodem */
+.zdjecie {
+  margin: 0 0 16px;
+}
+
+.card img {
+  border-bottom: 3px dashed #d5001c;
+}
+
+.zdjecie img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.galeria img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* #wygenerowane przez AI - tabela specyfikacji jak karta osiągów: każdy wiersz to osobny pasek z odstępem,
+   nazwa parametru mała i szara, wartość duża po prawej czcionką z nagłówków */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+th {
+  padding: 0 16px 8px;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: left;
+  color: #d5001c;
+  border-bottom: 2px dashed #d5001c;
+}
+
+th:last-child {
+  text-align: right;
+}
+
+td {
+  padding: 14px 16px;
+  background: #151515;
+}
+
+td:first-child {
+  width: 45%;
+  border-left: 4px solid #d5001c;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999999;
+}
+
+td:last-child {
+  text-align: right;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+tbody tr:hover td {
+  background: #1f0a0d;
+}
+
+tbody tr:hover td:last-child {
+  color: #ff3347;
+}
+
+/* #wygenerowane przez AI - stopka na całą szerokość z czerwoną linią u góry */
+footer {
+  grid-column: 1 / -1;
+  margin-top: 48px;
+  padding: 24px 40px;
+  background: #000000;
+  border-top: 4px solid #d5001c;
+  font-size: 13px;
+  color: #999999;
+}
+
+footer a {
+  color: #ff3347;
+}
+
+@media (max-width: 600px) {
+  body { display: block; }
+
+  header { min-height: 160px; padding: 20px 16px; }
+  h1 { font-size: 2.2rem; }
+
+  nav { border-right: none; border-bottom: 2px solid #d5001c; }
+  nav ul { position: static; display: flex; flex-wrap: wrap; padding: 0; }
+  nav a { padding: 10px 12px; font-size: 0.85rem; border-left: none; }
+
+  body > section { padding: 0 12px; }
+  h2 { font-size: 1.6rem; }
+
+  .zdjecie img { aspect-ratio: 16 / 9; }
+  .galeria { grid-template-columns: 1fr; }
+
+  /* #wygenerowane przez AI - na telefonie mniejsze wartości w tabeli, żeby długie opisy się mieściły */
+  td { padding: 10px; }
+  td:last-child { font-size: 1rem; }
+
+  footer { padding: 20px 12px; }
+}

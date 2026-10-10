@@ -1,0 +1,12 @@
+# Pliki konfiguracyjne IDE (PhpStorm / JetBrains)
+.idea/
+
+# Pliki systemowe macOS
+.DS_Store
+
+# Sprawozdania i instrukcje
+*.docx
+*.pdf
+
+# Projekty PureRef
+*.pur
