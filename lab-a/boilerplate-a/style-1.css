@@ -1,3 +1,179 @@
 body {
-  background-color: #dfecff;
+  background-color: #F3F4F6;
+  margin: 0;
+}
+
+/* https://uiverse.io/adamgiebl/new-crab-79 */
+.card {
+  background: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo {
+  width: 50px;
+  position: absolute;
+  left: 24px;
+}
+figure {
+  margin: 4px 0 16px;
+}
+
+.card img {
+  border: 3px solid #111111;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: "American Typewriter";
+  flex: 1;
+  margin: 0;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  padding: 24px 90px;
+  background: linear-gradient(155deg, #f2f4f6, #c6d5e4);
+}
+
+nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  justify-content: center;
+  padding: 12px;
+}
+
+nav a {
+  color: #111;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1a1a1a;
+}
+
+h2 {
+  width: 75%;
+  margin: 40px auto 12px;
+}
+
+/* #wygenerowane przez AI - wygląd nagłówków H2: pionowy pasek z lewej i krój jak w H1 */
+h2 {
+  font-family: "American Typewriter", Georgia, serif;
+  font-size: 1.8rem;
+  border-left: 6px solid #111111;
+  padding-left: 14px;
+  box-sizing: border-box;
+}
+
+h3 { color: #555; }
+
+/* #wygenerowane przez AI - wygląd nagłówków H3: małe kapitaliki z rozstrzeleniem i cienką linią pod spodem */
+h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #c6d5e4;
+}
+
+p { line-height: 1.6; }
+
+.galeria {
+  display: flex;
+  gap: 12px;
+}
+
+/* #wygenerowane przez AI - zdjęcia w galerii dzielą szerokość karty po równo i nie wychodzą poza nią */
+.galeria {
+  clear: both;
+}
+
+.galeria img {
+  flex: 1 1 0;
+  min-width: 0;
+  object-fit: cover;
+  margin: 0;
+}
+
+/* #wygenerowane przez AI - pojedyncze zdjęcie po prawej stronie, tekst je opływa */
+.card {
+  display: flow-root;
+}
+
+.card .zdjecie {
+  float: right;
+  width: 40%;
+  margin: 0 0 12px 20px;
+}
+
+footer {
+  background: #111;
+  color: #eee;
+  padding: 24px 12.5%;
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background: #111111;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+td:first-child {
+  font-weight: bold;
+  width: 45%;
+}
+footer a {
+  color: #ccc;
+}
+
+@media (max-width: 600px) {
+  .card, h2 { width: auto; margin-left: 12px; margin-right: 12px; }
+  header { padding: 16px 12px; }
+  nav ul { flex-direction: column; gap: 8px; }
+  .galeria { flex-direction: column; }
+
+  /* #wygenerowane przez AI - na telefonie zdjęcie na całą szerokość nad tekstem */
+  .card .zdjecie { float: none; width: auto; margin: 0 0 12px; }
+
+  /* #wygenerowane przez AI - w kolumnie zdjęcia z galerii zachowują swoją wysokość */
+  .galeria img { flex: none; width: 100%; }
+
+  .logo { position: static; margin: 0; }
 }
