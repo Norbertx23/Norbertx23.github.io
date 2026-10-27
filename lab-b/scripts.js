@@ -1,3 +1,4 @@
+/*Wiekszość pisane recznie przy wskazówkach caluda i jego podpowiedziach*/
 class Todo {
     constructor() {
         this.tasks = JSON.parse(localStorage.getItem('tasksList')) || [];
@@ -17,7 +18,7 @@ class Todo {
         localStorage.setItem('tasksList', JSON.stringify(this.tasks));
     }
 
-    /*metoda pomocnicza wydzielona z add() przez Ai, używana przy dodawaniu i edycji*/
+    /*Claude: wydzielił walidację z add() do osobnej metody validate(), żeby używać jej przy dodawaniu i edycji*/
     validate(text, date) {
         const errors = [];
 
@@ -35,9 +36,6 @@ class Todo {
                 errors.push('Data nie może być wcześniejsza niż dzisiaj!');
             }
         }
-        else{
-            errors.push('Data nie może być pusta!');
-        }
 
         return errors;
     }
@@ -50,7 +48,7 @@ class Todo {
             alert(errors.join('\n'));
             return false;
         }
-
+        /*Wygenerowane przy użyciu Claude*/
         this.tasks.push({text: item, date: date});
         this.save();
         this.draw();
@@ -64,7 +62,7 @@ class Todo {
         this.draw();
     }
 
-    /*Ai pomoglo ziamplementowac po kliknieciu w pole edycje*/
+    /*Claude: pomógł zaimplementować edycję po kliknięciu w zadanie (pola input zamiast tekstu, zapis przy focusout)*/
     draw() {
         const listContainer = document.getElementById('list-container');
         listContainer.innerHTML = '';
@@ -143,7 +141,7 @@ class Todo {
 
         element.appendChild(document.createTextNode(text.slice(0, startIdx)));
 
-        /*wygenerowane przez Ai*/
+        /*Claude: wygenerował opakowanie wyszukanej frazy w element <mark>*/
         const mark = document.createElement('mark')
 
         mark.textContent = text.slice(startIdx, endIdx);
