@@ -1,9 +1,11 @@
+/*Kod wziety i zmodyfikowany z repo */
 let map = L.map('map').setView([53.430127, 14.564802], 18);
 // L.tileLayer.provider('OpenStreetMap.DE').addTo(map);
 L.tileLayer.provider('Esri.WorldImagery').addTo(map);
 let marker = L.marker([53.430127, 14.564802]).addTo(map);
 marker.bindPopup("<strong>Your Localization</strong>");
 
+/*Wygenerowane Claude oppus 5.5 kod notyfikacji*/
 if ("Notification" in window) {
     Notification.requestPermission().then(permission => {
         console.log("Notification permission:", permission);
@@ -12,6 +14,7 @@ if ("Notification" in window) {
     console.log("No notifications.");
 }
 
+/*Kod wziety i zmodyfikowany z repo */
 document.getElementById("Pobranie").addEventListener("click", function() {
     leafletImage(map, function (err, canvas) {
         // here we have the canvas
@@ -28,6 +31,7 @@ document.getElementById("Pobranie").addEventListener("click", function() {
     });
 });
 
+/*Kod wziety i zmodyfikowany z repo */
 document.getElementById("Lokalizacja").addEventListener("click", function(event) {
     if (! navigator.geolocation) {
         console.log("No geolocation.");
@@ -46,63 +50,117 @@ document.getElementById("Lokalizacja").addEventListener("click", function(event)
     });
 });
 
-// ===== 22-drag-and-drop =====
-let items = document.querySelectorAll('.item');
-for (let item of items) {
+/*Kod wziety i zmodyfikowany z repo */
+function addItemListeners(item) {
     item.addEventListener("dragstart", function(event) {
-        this.style.border = "5px dashed #D8D8FF";
+        this.classList.add("dragging");
         event.dataTransfer.setData("text", this.id);
     });
 
     item.addEventListener("dragend", function(event) {
-        this.style.borderWidth = "0";
+        this.classList.remove("dragging");
     });
 }
 
-let targets = document.querySelectorAll(".drag-target");
-for (let target of targets) {
+/*Kod wziety i zmodyfikowany z repo */
+function addTargetListeners(target) {
     target.addEventListener("dragenter", function (event) {
-        this.style.border = "2px solid #7FE9D9";
+        this.classList.add("over");
     });
     target.addEventListener("dragleave", function (event) {
-        this.style.border = "2px dashed #7f7fe9";
+        this.classList.remove("over");
     });
     target.addEventListener("dragover", function (event) {
         event.preventDefault();
     });
     target.addEventListener("drop", function (event) {
+        event.preventDefault();
+        this.classList.remove("over");
+
         let myElement = document.querySelector("#" + event.dataTransfer.getData('text'));
+        let source = myElement.parentElement;
+        let existing = this.firstElementChild;
+
+        if (existing && existing !== myElement) {
+            source.insertBefore(existing, myElement);
+        }
+
         this.appendChild(myElement)
-        this.style.border = "2px dashed #7f7fe9";
+
+        updateCellState(this);
+        if (source.classList.contains("drag-target")) {
+            updateCellState(source);
+        }
+
+        checkPuzzle();
     }, false);
 }
 
-// ===== podział mapy na kafelki =====
-let tilesCount = 16;
+/*Wygenerowane Claude oppus 5.5 */
+function updateCellState(cell) {
+    cell.classList.toggle("filled", cell.firstElementChild !== null);
+}
+
+/*Kod napisany przy wsparciu Claude oppus 5.5 tlumaczyl jak do tgeo podejsc*/
+function checkPuzzle() {
+    for (let i = 0; i < tilesCount; i++) {
+        let cell = document.getElementById("cell-" + i);
+        let tile = cell.firstElementChild;
+
+        if (!tile || tile.id !== "tile-" + i) {
+            return;
+        }
+    }
+
+    if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("Sukces", {
+            body: "Puzzle zostały poprawnie ułożone!"
+        });
+    }
+
+    setTimeout(() => alert("Sukces"), 0);
+}
+
+let tilesCount = 4;
 let gridSize = Math.sqrt(tilesCount);
 
+/*Napisane przy wsparciu z repo ci opussa 5.5 on pomagał tlumaczyl ja staralem sie recznie pisac*/
 function splitMap() {
     let rasterMap = document.getElementById("rasterMap");
     let puzzle = document.getElementById("puzzle");
-    puzzle.innerHTML = "";                  // usuń poprzednie kafelki
+    puzzle.innerHTML = "";
 
     let pieceW = Math.floor(rasterMap.width / gridSize);
     let pieceH = Math.floor(rasterMap.height / gridSize);
     let pieces = [];
 
+    let board = document.getElementById("ukladanie");
+    board.innerHTML = "";
+
+    document.documentElement.style.setProperty("--grid-size", gridSize);
+
+    for (let i = 0; i < tilesCount; i++) {
+        let cell = document.createElement("div");
+        cell.className = "drag-target";
+        cell.id = "cell-" + i;
+        addTargetListeners(cell);
+        board.appendChild(cell);
+    }
+
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
             let piece = document.createElement("canvas");
-            piece.id = "tile-" + (row * gridSize + col);   // poprawna pozycja kafelka
+            piece.id = "tile-" + (row * gridSize + col);
+            piece.className = "item";
+            piece.draggable = true;
+            addItemListeners(piece);
             piece.width = pieceW;
             piece.height = pieceH;
-            piece.style.width = (100 / gridSize) + "%";
-            piece.style.height = (100 / gridSize) + "%";
 
             piece.getContext("2d").drawImage(
                 rasterMap,
-                col * pieceW, row * pieceH, pieceW, pieceH,   // skąd wyciąć
-                0, 0, pieceW, pieceH                          // gdzie narysować
+                col * pieceW, row * pieceH, pieceW, pieceH,
+                0, 0, pieceW, pieceH
             );
             pieces.push(piece);
         }

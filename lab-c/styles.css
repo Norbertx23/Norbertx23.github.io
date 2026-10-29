@@ -1,3 +1,4 @@
+/*Style wygenerowane w wiekszości przez Opus 5.5 i wzięte z poprzednich labów kafelek lewitujacy w szarych odcieniach*/
 body {
   background-color: #e6f1fc;
 }
@@ -59,13 +60,48 @@ main {
   overflow: hidden;
 }
 
-#puzzle canvas {
+.item {
   display: block;
+  box-sizing: border-box;
+  cursor: grab;
+  width: calc(100% / var(--grid-size));
+  height: calc(100% / var(--grid-size));
+}
+
+/* kafelek leżący na planszy wypełnia całe pole */
+.drag-target .item {
+  width: 100%;
+  height: 100%;
+}
+
+/* kafelek w trakcie przeciągania */
+.item.dragging {
+  border: 5px dashed #D8D8FF;
 }
 
 #ukladanie {
   grid-column: 2;
   grid-row: 3;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow: hidden;
+}
+
+.drag-target {
+  box-sizing: border-box;
+  border: 1px dashed #666666;
+  width: calc(100% / var(--grid-size));
+  height: calc(100% / var(--grid-size));
+}
+
+/* pole z położonym kafelkiem */
+.drag-target.filled {
+  border: none;
+}
+
+/* kafelek przeciągany nad polem */
+.drag-target.over {
+  border: 2px solid #7FE9D9;
 }
 
 #map {
