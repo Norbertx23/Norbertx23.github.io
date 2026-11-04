@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Norbert Świstak (55760) - AI LAB D</title>
+
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <main class="app">
+        <header class="app-header">
+            <h1 class="app-title">Pogoda</h1>
+
+            <form class="search" id="search-form">
+                <input class="search-input" id="address" type="text"
+                       placeholder="Wpisz adres lub miejscowość" autocomplete="off">
+                <button class="search-button" id="search-button" type="submit">Pogoda</button>
+            </form>
+
+            <p class="status" id="status"></p>
+        </header>
+
+        <section class="panel panel-current">
+            <div class="location">
+                <p class="location-name" id="location-name"></p>
+                <p class="location-date" id="location-date"></p>
+            </div>
+
+            <div class="current">
+                <span class="temperature" id="current-temperature"></span>
+                <span class="condition" id="current-condition"></span>
+            </div>
+
+            <dl class="details" id="current-details"></dl>
+
+            <div class="sun" id="current-sun"></div>
+        </section>
+
+        <section class="panel panel-forecast">
+            <h2 class="section-title">Prognoza co 3 godziny</h2>
+            <div class="forecast" id="forecast-list"></div>
+        </section>
+    </main>
+</body>
+</html>

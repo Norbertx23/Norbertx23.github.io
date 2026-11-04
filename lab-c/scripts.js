@@ -121,7 +121,7 @@ function checkPuzzle() {
     setTimeout(() => alert("Sukces"), 0);
 }
 
-let tilesCount = 4;
+let tilesCount = 16;
 let gridSize = Math.sqrt(tilesCount);
 
 /*Napisane przy wsparciu z repo ci opussa 5.5 on pomagał tlumaczyl ja staralem sie recznie pisac*/

@@ -1,0 +1,351 @@
+/*
+ * Wygląd przeniesiony z pogody w magic_mirror: biel na czerni, a hierarchię
+ * buduje rozmiar i przezroczystość, nigdy odcień. Krycie i wagi są nieco wyższe
+ * niż na lustrze, bo stronę czyta się z bliska i na różnych ekranach.
+ */
+:root {
+  --color-background: #000000;
+  --color-text: #e8e8e8;
+
+  --opacity-secondary: 0.78;
+  --opacity-tertiary: 0.6;
+  --opacity-annotation: 0.5;
+
+  --font-family: 'Helvetica Neue', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+
+  --font-size-display: max(4.5rem, 9vw);
+  --font-size-body: 1.125rem;
+  --font-size-small: 0.875rem;
+  --font-size-annotation: 0.75rem;
+
+  --letter-spacing-wide: 0.08em;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+
+  --line: rgba(232, 232, 232, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Skala bez górnej granicy: wszystko w rem rośnie razem z szerokością ekranu. */
+html {
+  font-size: max(100%, 1.1vw);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-light);
+  line-height: 1.35;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Układ: na telefonie jedna kolumna, od tabletu prognoza idzie na prawo. */
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'current'
+    'forecast';
+  gap: var(--space-xl);
+  padding: clamp(1.25rem, 5vw, 4rem);
+}
+
+.app-header {
+  grid-area: header;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.panel-current {
+  grid-area: current;
+}
+
+.panel-forecast {
+  grid-area: forecast;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.panel-current {
+  gap: var(--space-lg);
+}
+
+.app-title,
+.section-title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  opacity: var(--opacity-tertiary);
+}
+
+/* Wyszukiwarka: sama linia pod tekstem, bez ramek i wypełnień. */
+.search {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-md);
+  border-bottom: 1px solid var(--line);
+  transition: border-color 200ms ease;
+}
+
+.search:focus-within {
+  border-color: var(--color-text);
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-sm) 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: var(--font-weight-thin);
+}
+
+.search-input::placeholder {
+  color: inherit;
+  opacity: var(--opacity-annotation);
+}
+
+.search-button {
+  flex-shrink: 0;
+  align-self: center;
+  margin-bottom: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--font-size-small);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.search-button:hover {
+  background-color: var(--color-text);
+  color: var(--color-background);
+}
+
+.search-button:focus-visible {
+  outline: 1px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.search-button:disabled {
+  opacity: var(--opacity-annotation);
+  cursor: default;
+}
+
+.status {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-secondary);
+}
+
+.status:empty {
+  display: none;
+}
+
+/* Pogoda bieżąca */
+.location {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.location-date {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-tertiary);
+}
+
+.current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.temperature {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-thin);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.condition {
+  opacity: var(--opacity-secondary);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.detail-label {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-tertiary);
+}
+
+.detail-value {
+  opacity: var(--opacity-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Krycie ustawiamy na liściach, bo zagnieżdżone by się mnożyło. */
+.sun {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-small);
+}
+
+.sun-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.sun-label {
+  opacity: var(--opacity-tertiary);
+}
+
+.sun-time {
+  opacity: var(--opacity-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Prognoza: dni układają się w tyle kolumn, ile mieści ekran. */
+.forecast {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-xl) var(--space-lg);
+  align-items: start;
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.day-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-light);
+}
+
+.day-relative {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-tertiary);
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Wiersz wpisu: godzina, opis z odczuwalną, temperatura. */
+.slot {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.slot-time {
+  opacity: var(--opacity-tertiary);
+}
+
+.slot-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-left: var(--space-xs);
+  font-size: var(--font-size-small);
+  line-height: 1.25;
+}
+
+.slot-description {
+  opacity: var(--opacity-secondary);
+}
+
+.slot-feels {
+  font-size: var(--font-size-annotation);
+  opacity: var(--opacity-annotation);
+}
+
+.slot-temp {
+  min-width: 2.5rem;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-thin);
+}
+
+/* Bieżąca pogoda zostaje na ekranie podczas przewijania długiej prognozy. */
+@media (min-width: 45rem) {
+  .app {
+    grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.2fr);
+    grid-template-areas:
+      'header header'
+      'current forecast';
+    gap: var(--space-xl) clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .panel-current {
+    position: sticky;
+    top: var(--space-lg);
+  }
+}
+
+/* Media query liczy rem od 16 px przeglądarki, nie od skali ustawionej na html,
+   więc próg to zawsze 1200 px. */
+@media (min-width: 75rem) {
+  .app {
+    grid-template-columns: minmax(20rem, 1fr) minmax(0, 3fr);
+  }
+}
