@@ -250,6 +250,11 @@ dd {
   font-variant-numeric: tabular-nums;
 }
 
+/* Dodane przez Claude (AI): ukrywa nagłówek prognozy, gdy nie ma danych. */
+.section-title:has(+ .forecast:empty) {
+  display: none;
+}
+
 /* Prognoza: dni układają się w tyle kolumn, ile mieści ekran. */
 .forecast {
   display: grid;
