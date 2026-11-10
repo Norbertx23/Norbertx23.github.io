@@ -1,0 +1,154 @@
+// Wygenerowane claude opus 5.5
+// Style tylko dla stron autora (body ma dodatkową klasę "author"), strony Post bez zmian
+.author {
+  // Awatar: okrągłe zdjęcie albo kółko z inicjałami
+  .author-avatar {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: @accentColor;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  // Lista: każdy autor jako karta z akcentem po lewej, awatar obok danych
+  ul.index-list > li {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    border-left: 4px solid @accentColor;
+    background-color: @backgroundColor;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+
+    h3 {
+      margin-bottom: 0.25em;
+    }
+
+    .author-email {
+      color: tint(@fontColor, 30%);
+    }
+
+    ul.action-list {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  // Podgląd: duży awatar obok nagłówka
+  .author-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1.5em;
+
+    .author-avatar {
+      width: 120px;
+      height: 120px;
+    }
+
+    .author-avatar-initials {
+      font-size: 2.5rem;
+    }
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  // Podgląd: mała etykieta nad wartością, sekcje rozdzielone odstępem
+  dl.author-details {
+    margin-bottom: 2em;
+
+    dt {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: @accentColor;
+      margin-bottom: 0.25em;
+    }
+
+    dd {
+      margin-bottom: 2em;
+    }
+
+    .author-bio {
+      white-space: pre-line;
+      padding-left: 1em;
+      border-left: 3px solid @lineColor;
+      color: tint(@fontColor, 20%);
+    }
+  }
+
+  // Podgląd: sekcja źródła zdjęcia na dole, drobnym drukiem
+  .author-photo-source {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid @lineColor;
+    font-size: 0.85rem;
+    color: tint(@fontColor, 30%);
+
+    h4 {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: @accentColor;
+      margin-bottom: 0.25em;
+    }
+
+    a {
+      color: tint(@fontColor, 30%);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+  }
+
+  // Dymek z podpisem zdjęcia, pokazywany od razu po najechaniu
+  .author-photo {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    line-height: 0;
+
+    &::after {
+      content: attr(data-credit);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 10;
+      margin-top: 0.5em;
+      padding: 0.4em 0.75em;
+      width: max-content;
+      max-width: 300px;
+      background-color: @fontColor;
+      color: #ffffff;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s;
+      pointer-events: none;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Formularz: pola email i URL tej samej szerokości co pola tekstowe
+  .edit-form .form-group input[type="email"],
+  .edit-form .form-group input[type="url"] {
+    flex-grow: 3;
+  }
+}
